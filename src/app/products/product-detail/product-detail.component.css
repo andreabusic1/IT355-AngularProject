@@ -1,0 +1,137 @@
+/* Container styling */
+.container.product-container {
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Title styling */
+.container.product-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Image styling */
+.centered-image {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px auto;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+/* Content wrapper styling */
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Paragraph styling */
+.content-wrapper p {
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #333;
+}
+
+/* Strong text styling */
+.content-wrapper strong {
+  color: #555;
+}
+
+/* Quantity input group styling */
+.quantity-input-group {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+}
+
+.quantity-input-group .input-group-text {
+  background-color: none;
+  color: #000000;
+  border: none;
+}
+
+.quantity-input-group .form-control {
+  max-width: 100px;
+  margin-left: 10px;
+}
+
+/* Total price styling */
+.total-price {
+  grid-column: span 2;
+  margin-top: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Button styling */
+.btn-primary {
+  color: #fff;
+  background-color: #627478bd;
+  border-color: none;
+  padding: 10px 15px;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  display: flex; /* Postavlja element kao flex kontejner */
+  justify-content: center;
+  border: none;
+
+}
+
+.btn-primary:hover {
+  background-color: #218838;
+}
+
+/* Success message styling */
+.alert-success {
+  margin-left: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  margin-top: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 767.98px) {
+  .container.product-container {
+    padding: 10px;
+  }
+
+  .content-wrapper {
+    display: block;
+    padding: 10px 0;
+  }
+
+  .quantity-input-group {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .d-flex.align-items-center {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-primary {
+    margin-bottom: 10px;
+  }
+
+  .alert-success {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+}

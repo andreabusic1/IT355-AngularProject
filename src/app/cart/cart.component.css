@@ -1,0 +1,84 @@
+.container {
+    margin-top: 20px; /* Razmak od vrha */
+    padding: 20px; /* Unutrašnji razmak */
+    background-color: #f9f9f9; /* Pozadinska boja */
+    border-radius: 8px; /* Zaobljeni uglovi */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Senka */
+  }
+  
+  h2 {
+    text-align: center; /* Centrira naslov */
+    margin-bottom: 20px; /* Razmak ispod naslova */
+  }
+  
+  .list-group-item {
+    border: 1px solid #ddd; /* Boja ivice */
+    border-radius: 4px; /* Zaobljeni uglovi */
+    margin-bottom: 10px; /* Razmak ispod stavki */
+    padding: 15px; /* Unutrašnji razmak */
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .col-md-8 h5 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.25rem; /* Veličina fonta za ime proizvoda */
+    font-weight: bold; /* Debljina fonta */
+  }
+  
+  .col-md-8 p {
+    margin-bottom: 5px; /* Razmak ispod paragrafa */
+  }
+  
+  .col-md-4 {
+    text-align: right; /* Poravnanje teksta desno */
+  }
+  
+  .col-md-4 p {
+    margin-bottom: 5px; /* Razmak ispod paragrafa */
+  }
+  
+  .mt-3 {
+    margin-top: 1rem;
+  }
+  
+  .text-right {
+    text-align: right; /* Poravnanje teksta desno */
+  }
+  
+  .btn-danger {
+    color: #fff; /* Boja teksta */
+    background-color: #da2436c3; /* Boja pozadine */
+    border-color: #ffffff;/* Boja ivice */
+    padding: 10px 20px; /* Unutrašnji razmak */
+    font-size: 0.875rem; /* Veličina fonta */
+    border-radius: 8px;
+    cursor: pointer; /* Pokazivač */
+    margin-right: 10px; /* Razmak desno */
+  }
+  
+  .btn-danger:hover {
+    background-color: #7f000d; /* Boja pozadine na hover */
+    /* Boja ivice na hover */
+    border-color: #ffffff; 
+  }
+  
+  .btn-success {
+    color: #fff; /* Boja teksta */
+    background-color: #28a746c8; /* Boja pozadine */
+    border-color: #ffffff; /* Boja ivice */
+    padding: 10px 20px; /* Unutrašnji razmak */
+    font-size: 0.875rem; /* Veličina fonta */
+    border-radius: 8px;
+    cursor: pointer; /* Pokazivač */
+  }
+  
+  .btn-success:hover {
+    background-color: #218838; /* Boja pozadine na hover */
+    border-color: #1e7e34; /* Boja ivice na hover */
+  }
+  

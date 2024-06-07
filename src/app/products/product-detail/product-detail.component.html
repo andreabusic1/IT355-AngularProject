@@ -1,0 +1,30 @@
+<div *ngIf="product" class="container product-container">
+  <h2>{{ product.name }}</h2>
+  <div class="row">
+    <div class="col-md-6 text-center">
+      <img [src]="product.imageUrl" class="centered-image" alt="{{ product.name }}" (click)="goToCart()">
+    </div>
+    <div class="col-md-6">
+      <div class="content-wrapper">
+        <p>{{ product?.description }}</p>
+        <p><strong>Price:</strong> ${{ product?.price }}</p>
+        <p><strong>Stock:</strong> {{ product?.stock }}</p>
+        <div class="input-group quantity-input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Quantity:</span>
+          </div>
+          <input type="number" class="form-control text-center" [(ngModel)]="quantity" [max]="product.stock" [min]="1">
+        </div>
+        <p class="total-price"><strong>Total Price:</strong> ${{ totalPrice }}</p>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-primary mr-3" (click)="addToCart(product)">
+            Add to Cart
+          </button>
+          <div *ngIf="successMessage" class="alert alert-success mb-0">
+            {{ successMessage }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

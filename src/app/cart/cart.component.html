@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>Your Cart</h2>
+  <div *ngIf="items.length === 0">
+    <p>Your cart is empty.</p>
+  </div>
+  <div *ngIf="items.length > 0">
+    <ul class="list-group">
+      <li *ngFor="let item of items" class="list-group-item">
+        <div class="row">
+          <div class="col-md-8">
+            <h5>{{ item.product.name }}</h5>
+            <p>{{ item.product.description }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+          </div>
+          <div class="col-md-4 text-right">
+            <p>${{ item.product.price }}</p>
+            <p>Total: ${{ item.product.price * item.quantity }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="text-right mt-3">
+      <h4>Total Price: ${{ getTotalPrice() }}</h4>
+      <button class="btn btn-danger" (click)="clearCart()">Clear Cart</button>
+      <button class="btn btn-success" [routerLink]="['/checkout']">Checkout</button>
+    </div>
+  </div>
+</div>
