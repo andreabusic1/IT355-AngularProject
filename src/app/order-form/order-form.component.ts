@@ -1,7 +1,8 @@
+// order-form.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CartService } from '../services/cart.service';
+import { IqosService } from '../services/iqos.service';
 
 @Component({
   selector: 'app-order-form',
@@ -13,18 +14,18 @@ export class OrderFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private cartService: CartService,
+    private iqosService: IqosService,
     private router: Router
   ) {
     this.orderForm = this.fb.group({
-      fullName: ['', Validators.required],
-      address: ['', Validators.required],
+      id: [null, Validators.required],
+      user_id: [null, Validators.required],
+      address_line1: ['', Validators.required],
+      address_line2: [''],
       city: ['', Validators.required],
-      zipCode: ['', Validators.required],
+      state: ['', Validators.required],
+      postal_code: ['', Validators.required],
       country: ['', Validators.required],
-      cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
-      expirationDate: ['', Validators.required],
-      cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
     });
   }
 
@@ -32,26 +33,15 @@ export class OrderFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.orderForm.valid) {
-      const orderData = {
-        userId: 1,  // Primer korisničkog ID-a, potrebno je da ga dinamički postavite
-        fullName: this.orderForm.value.fullName,
-        address: this.orderForm.value.address,
-        city: this.orderForm.value.city,
-        zipCode: this.orderForm.value.zipCode,
-        country: this.orderForm.value.country,
-        cardNumber: this.orderForm.value.cardNumber,
-        expirationDate: this.orderForm.value.expirationDate,
-        cvv: this.orderForm.value.cvv
-      };
+      const orderData = this.orderForm.value;
 
-      this.cartService.createOrder(orderData).subscribe(
+      this.iqosService.createUserAddress(orderData).subscribe(
         response => {
-          console.log('Order placed successfully!', response);
-          this.cartService.clearCart();
-          this.router.navigate(['/products']);
+          console.log('Address saved successfully!', response);
+          this.router.navigate(['/success']); // Navigate to a success page or another page as needed
         },
         error => {
-          console.error('There was an error placing the order!', error);
+          console.error('There was an error saving the address!', error);
         }
       );
     }

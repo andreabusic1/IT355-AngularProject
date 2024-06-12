@@ -15,18 +15,14 @@ export class AuthService {
   public getToken(): string | null {
     return localStorage.getItem('jwtToken');
   }
-
   isLoggedIn(): boolean {
-    const token = this.getToken();
-    if (!token) {
-      return false;
-    }
-    return !this.isTokenExpired(token);
+    // Uvek vraća true jer ne proverava token
+    return true;
   }
 
   isTokenExpired(token: string): boolean {
     try {
-      const decoded: any = jwtDecode.default(token); // Using jwtDecode.default for decoding
+      const decoded: any = jwtDecode.default(token); 
       const isExpired = (decoded.exp * 1000) < Date.now();
       return isExpired;
     } catch (error) {
@@ -50,37 +46,32 @@ export class AuthService {
     return false;
   }
 
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, { username, password });
+  }
+
   logout(): void {
     const token = this.getToken();
-    if (token) {
-      this.http.post(`${this.baseUrl}/logout`, {}, {
-        headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
-      }).subscribe({
-        next: () => {
-          console.log('Logged out successfully.');
-          localStorage.removeItem('jwtToken');
-          this.router.navigate(['/products']);
-        },
-        error: error => {
-          console.error('Logout failed:', error);
-          localStorage.removeItem('jwtToken');
-        }
-      });
-    } else {
-      console.error('No token found on logout.');
-    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    this.http.post(`${this.baseUrl}/logout`, {}, { headers }).subscribe(
+      response => {
+        console.log(response);
+        localStorage.removeItem('jwtToken');
+        this.router.navigate(['/login']);
+      },
+      error => {
+        console.error('Logout failed:', error);
+      }
+    );
   }
 
-  login(username: string, password: string): Observable<{ jwt: string }> {
-    localStorage.removeItem('jwtToken');
-    return this.http.post<{ jwt: string }>(`${this.baseUrl}/login`, { username, password });
+  saveToken(token: string): void {
+    localStorage.setItem('jwtToken', token);
   }
-
   register(user: { firstName: string; lastName: string; username: string; password: string; role: string }): Observable<{ jwt: string }> {
     return this.http.post<{ jwt: string }>(`${this.baseUrl}/register`, user);
   }
-
-  handleAuthentication(jwt: string): void {
+    handleAuthentication(jwt: string): void {
     console.log('Authentication successful:', jwt);
     localStorage.setItem('jwtToken', jwt);
     this.router.navigate(['/']);

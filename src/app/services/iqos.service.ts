@@ -15,7 +15,9 @@ export class IqosService {
 
   constructor(private http: HttpClient) { }
   
-
+  createUserAddress(userAddress: UserAddress): Observable<UserAddress> {
+    return this.http.post<UserAddress>(`${this.apiUrl}/userAddresses`, userAddress);
+  }
   // User methods
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/users`);
@@ -116,9 +118,7 @@ export class IqosService {
     return this.http.get<UserAddress>(`${this.apiUrl}/userAddresses/${id}`);
   }
 
-  createUserAddress(userAddress: UserAddress): Observable<UserAddress> {
-    return this.http.post<UserAddress>(`${this.apiUrl}/userAddresses`, userAddress);
-  }
+  
 
   updateUserAddress(id: number, userAddress: UserAddress): Observable<UserAddress> {
     return this.http.put<UserAddress>(`${this.apiUrl}/userAddresses/${id}`, userAddress);
