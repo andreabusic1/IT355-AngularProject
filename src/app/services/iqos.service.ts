@@ -109,7 +109,6 @@ export class IqosService {
     return this.http.delete<void>(`${this.apiUrl}/orderItems/${id}`);
   }
 
-  // UserAddress methods
   getUserAddresses(): Observable<UserAddress[]> {
     return this.http.get<UserAddress[]>(`${this.apiUrl}/userAddresses`);
   }

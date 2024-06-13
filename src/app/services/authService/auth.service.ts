@@ -1,3 +1,5 @@
+// AuthService
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -15,15 +17,16 @@ export class AuthService {
   public getToken(): string | null {
     return localStorage.getItem('jwtToken');
   }
+
   isLoggedIn(): boolean {
-    // Uvek vraća true jer ne proverava token
-    return true;
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token);
   }
 
   isTokenExpired(token: string): boolean {
     try {
-      const decoded: any = jwtDecode.default(token); 
-      const isExpired = (decoded.exp * 1000) < Date.now();
+      const decoded: any = jwtDecode.default(token);
+      const isExpired = decoded.exp * 1000 < Date.now();
       return isExpired;
     } catch (error) {
       console.error('Token decoding failed:', error);
@@ -36,7 +39,7 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       try {
-        const decoded: any = jwtDecode.default(token); // Using jwtDecode.default for decoding
+        const decoded: any = jwtDecode.default(token);
         return decoded.Role && decoded.Role.includes('ADMIN');
       } catch (error) {
         console.error('Failed to decode token for admin check:', error);
@@ -68,12 +71,23 @@ export class AuthService {
   saveToken(token: string): void {
     localStorage.setItem('jwtToken', token);
   }
+
+  decodeToken(token: string): any {
+    try {
+      return jwtDecode.default(token);
+    } catch (error) {
+      console.error('Token decoding failed:', error);
+      return null;
+    }
+  }
+
   register(user: { firstName: string; lastName: string; username: string; password: string; role: string }): Observable<{ jwt: string }> {
     return this.http.post<{ jwt: string }>(`${this.baseUrl}/register`, user);
   }
-    handleAuthentication(jwt: string): void {
+
+  handleAuthentication(jwt: string): void {
     console.log('Authentication successful:', jwt);
-    localStorage.setItem('jwtToken', jwt);
-    this.router.navigate(['/']);
+    this.saveToken(jwt); // Čuvanje tokena
+    this.router.navigate(['/']); // Preusmeravanje na početnu stranicu
   }
 }

@@ -35,7 +35,25 @@
   .navbar-nav .nav-item .nav-link:hover {
     color: #007bff; /* Color on hover */
   }
-  
+  /* Styles for the logout button */
+.navbar-nav .logout-btn {
+  padding: 8px 12px;
+  margin: 0 10px;
+  background-color: #dc3545; /* Red color for logout button */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.navbar-nav .logout-btn:hover {
+  background-color: #c82333; /* Darker red color on hover */
+}
+
+.navbar-nav .logout-btn:focus {
+  outline: none; /* Remove outline on focus */
+}
+
   /* Responsive behavior */
   @media (max-width: 992px) {
     .navbar-nav {
